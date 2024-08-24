@@ -4,17 +4,14 @@ import url from 'url';
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-import dotenv from 'dotenv';
-
-dotenv.config();
-
 import express from 'express';
 import createError from 'http-errors';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 
-import indexRouter from './routes/index.js';
-import usersRouter from './routes/users.router.js';
+import indexRouter from '#routes/index';
+import usersRouter from '#routes/user.router';
+import linksRouter from '#routes/link.router';
 
 const app = express();
 
@@ -28,13 +25,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/links', linksRouter);
 
-app.use(function (req, res, next) {
-  next(createError(404));
+app.use(function (_, __, next) {
+  next(createError(404, 'Esta página no existe'));
 });
 
-app.use(function (err, req, res, next) {
+app.use(function (err, req, res, __) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
