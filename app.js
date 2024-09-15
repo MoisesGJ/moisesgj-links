@@ -10,8 +10,6 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 
 import indexRouter from '#routes/index';
-import usersRouter from '#routes/user.router';
-import linksRouter from '#routes/link.router';
 
 const app = express();
 
@@ -25,8 +23,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/', indexRouter);
-app.use('/api/users', usersRouter);
-app.use('/api/links', linksRouter);
 
 app.use(function (_, __, next) {
   next(createError(404, 'Esta página no existe'));
