@@ -2,7 +2,7 @@ import createError from 'http-errors';
 import formatDate from '#libs/moment';
 
 function isShortValid(shortUrl) {
-  return /^[a-zA-Z0-9]{3,10}$/.test(shortUrl);
+  return true;
 }
 
 function validateShortLink(req, __, next) {

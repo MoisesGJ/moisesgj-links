@@ -15,7 +15,7 @@ const linkSchema = new Schema(
       type: String,
       required: [true, 'La frase acortada es obligatoria.'],
       minlength: [3, 'La frase acortada debe tener al menos 3 caracteres.'],
-      maxlength: [10, 'La frase acortada no debe exceder los 50 caracteres.'],
+      maxlength: [99, 'La frase acortada no debe exceder los 99 caracteres.'],
       unique: true,
     },
     trackers: [

@@ -23,15 +23,18 @@ async function getLink(dataLinkParam, dataLinkReq) {
     dataLinkReq.headers['x-forwarded-for'] ||
     dataLinkReq.connection.remoteAddress || ''
   ).split(',');
+
+
   const infoIp = await getIpInfo(clientIp[0].trim());
 
   const clientDate = dataLinkReq.date;
 
   const clientPetition = {
+    ...infoIp,
     userAgent: clientUserAgent,
-    IP: JSON.stringify(infoIp),
     date: clientDate,
   };
+
 
   const newTracker = await TrackerService.createTracker(clientPetition);
 
